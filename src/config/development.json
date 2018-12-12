@@ -16,9 +16,6 @@
     "signPath": "/v1/job/sign",
     "deployPath": "/v1/job/deploy"
   },
-  "db": {
-    "database": "cicd"
-  },
   "sso": {
     "grantType": "client_credentials",
     "clientId": "signing-api",
