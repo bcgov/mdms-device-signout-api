@@ -44,11 +44,6 @@ nconf.overrides({
   environment: env,
   host: process.env.HOST || '127.0.0.1',
   port: process.env.PORT || defaultPort,
-  minio: {
-    host: process.env.MINIO_HOST,
-    accessKey: process.env.MINIO_ACCESS_KEY,
-    secretKey: process.env.MINIO_SECRET_KEY,
-  },
   db: {
     host: process.env.POSTGRES_HOST,
     database: process.env.APP_DB_NAME,
@@ -57,12 +52,6 @@ nconf.overrides({
   },
   sso: {
     clientSecret: process.env.SSO_CLIENT_SECRET,
-  },
-  agent: {
-    hostUrl: process.env.AGENT_URL,
-  },
-  session: {
-    key: process.env.SESSION_SECRET,
   },
 });
 

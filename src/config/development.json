@@ -1,21 +1,6 @@
 {
   "temporaryUploadPath": "uploads",
   "expirationInDays": 90,
-  "minio": {
-    "bucket": "secode-sign",
-    "port": 9000,
-    "useSSL": false,
-    "expiry": 604800,
-    "region": "us-east-1"
-  },
-  "session": {
-    "maxAge": 604800000,
-    "expires": 604800000
-  },
-  "agent": {
-    "signPath": "/v1/job/sign",
-    "deployPath": "/v1/job/deploy"
-  },
   "sso": {
     "grantType": "client_credentials",
     "clientId": "signing-api",
