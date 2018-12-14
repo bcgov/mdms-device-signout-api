@@ -24,6 +24,7 @@ import cors from 'cors';
 import passport from 'passport';
 import config from '../config';
 import ehlo from './routes/ehlo';
+import mdms from './routes/mdms';
 
 const corsOptions = {
   origin: config.get('environment') === 'development' ? '*' : config.get('apiUrl'),
@@ -35,6 +36,7 @@ const corsOptions = {
 export const router = app => {
   app.use(cors(corsOptions));
   app.use('/api/v1/ehlo', ehlo); // probes
+  app.use('/api/v1/mdms', mdms);
   // Any routes following the authentication middleware line below
   // will require authentication.
   app.use(passport.authenticate('jwt', { session: false }));

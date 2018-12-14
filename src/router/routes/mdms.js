@@ -1,5 +1,5 @@
 //
-// Code Signing
+// MDMS Generic Device Project
 //
 // Copyright © 2018 Province of British Columbia
 //
@@ -15,38 +15,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Jason Leach on 2018-05-23.
+// Created by Jason Leach on 2018-12-13.
 //
 
 'use strict';
 
-import knex from 'knex';
+import { asyncMiddleware } from '@bcgov/nodejs-common-utils';
+import { Router } from 'express';
 import config from '../../config';
-import OrgGroup from './models/orggroup';
+import DataManager from '../../libs/db';
 
-export default class DataManager {
-  constructor() {
-    const k = knex({
-      client: 'postgresql',
-      connection: {
-        user: config.get('db:user'),
-        database: config.get('db:database'),
-        port: 5432,
-        host: config.get('db:host'),
-        password: config.get('db:password'),
-      },
-      searchPath: ['public'],
-      debug: false,
-      pool: {
-        min: 1,
-        max: 64,
-      },
-      migrations: {
-        tableName: 'migration',
-      },
-    });
+const dm = new DataManager(config);
+const { db, OrgGroup } = dm;
 
-    this.db = k;
-    this.OrgGroup = OrgGroup;
-  }
-}
+const router = new Router();
+
+router.get(
+  '/',
+  asyncMiddleware(async (req, res) => {
+    try {
+      const results = await OrgGroup.find(db, {});
+      res.status(200).json(results);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).end();
+    }
+  })
+);
+
+module.exports = router;

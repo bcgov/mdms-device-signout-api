@@ -1,5 +1,5 @@
 //
-// Code Signing
+// Code Sign
 //
 // Copyright © 2018 Province of British Columbia
 //
@@ -15,20 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Created by Jason Leach on 2018-07-20.
+// Created by Jason Leach on 2018-05-06.
 //
 
-// if (!process.env.LISTENING_TO_UNHANDLED_REJECTION) {
-//   process.on('unhandledRejection', reason => {
-//     throw reason;
-//   });
-//   // Avoid memory leak by adding too many listeners
-//   process.env.LISTENING_TO_UNHANDLED_REJECTION = true;
-// }
+'use strict';
 
-jest.mock('fs');
-jest.mock('request-promise-native');
+import Model from './model';
 
-describe('Blarb', () => {
-  test.skip('This is a blarb', async () => {});
-});
+export default class Job extends Model {
+  static get fields() {
+    // primary key *must* be first!
+    return ['id', 'name'].map(field => `${this.table}.${field}`);
+  }
+
+  static get table() {
+    return 'ref_org_group';
+  }
+}
