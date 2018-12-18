@@ -15,7 +15,7 @@ LABEL summary="$SUMMARY" \
 
 RUN apk update && \
   apk upgrade && \
-  apk add bash
+  apk add --no-cache bash
 
 RUN npm i npm@latest -g --silent
 
@@ -36,3 +36,4 @@ ENV NODE_PATH $INSTALL_PATH/src
 EXPOSE 8089 9229
 
 CMD ["npm", "run", "dev"]
+
