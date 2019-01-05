@@ -1,6 +1,7 @@
 {
-  "temporaryUploadPath": "uploads",
-  "expirationInDays": 90,
+  "db": {
+    "database": "xxxx"
+  },
   "sso": {
     "grantType": "client_credentials",
     "clientId": "signing-api",

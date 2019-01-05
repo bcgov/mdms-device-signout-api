@@ -20,25 +20,34 @@
 
 'use strict';
 
-import { asyncMiddleware } from '@bcgov/nodejs-common-utils';
+import { getAllOrgGroups } from '@bcgov/mdms-nodejs-client';
+import { asyncMiddleware, errorWithCode, logger } from '@bcgov/nodejs-common-utils';
 import { Router } from 'express';
 import config from '../../config';
-import DataManager from '../../libs/db';
-
-const dm = new DataManager(config);
-const { db, OrgGroup } = dm;
 
 const router = new Router();
 
 router.get(
   '/',
   asyncMiddleware(async (req, res) => {
+    const rootOrgID = Number(config.get('mdms:rootOrgID'));
+    const credentials = {
+      host: config.get('mdms:host'),
+      token: config.get('mdms:tenantCode'),
+      username: config.get('mdms:username').replace('\\\\', '\\'),
+      password: config.get('mdms:password'),
+    };
+
     try {
-      const results = await OrgGroup.find(db, {});
-      res.status(200).json(results);
+      const results = await getAllOrgGroups(credentials, rootOrgID);
+      const og = results.map(r => Object.assign({}, { name: r.name, id: r.id }));
+
+      res.status(200).json(og);
     } catch (err) {
-      console.log(err.message);
-      res.status(500).end();
+      const message = `Unable to fetch groups for root ${rootOrgID}, error = ${err.message}`;
+      logger.error(message);
+
+      throw errorWithCode(message, 500);
     }
   })
 );

@@ -44,6 +44,13 @@ nconf.overrides({
   environment: env,
   host: process.env.HOST || '127.0.0.1',
   port: process.env.PORT || defaultPort,
+  mdms: {
+    rootOrgID: process.env.MDMS_ROOT_ORG_ID,
+    host: process.env.MDMS_HOST,
+    tenantCode: process.env.MDMS_TENANT_CODE,
+    username: process.env.MDMS_USERNAME,
+    password: process.env.MDMS_PASSWORD,
+  },
   db: {
     host: process.env.POSTGRES_HOST,
     database: process.env.APP_DB_NAME,

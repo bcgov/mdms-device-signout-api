@@ -9,6 +9,7 @@
   "main": "index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "@bcgov/mdms-nodejs-client": "^0.1.1",
     "@bcgov/nodejs-common-utils": "0.0.16",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
