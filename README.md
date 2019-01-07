@@ -1,6 +1,6 @@
 ## About
 
-This is the API component to the MDMS Generic Device Sign-out Service. This services is allows generic shared mobile devices to be signed out by the members of different teams.
+This is the API component to the MDMS Generic Device Sign-out Service. This services is allows both the web and mobile app to send sign-out information back to a central location for reporting and analysis.
 
 Additional component can be fond in these repos:
 
